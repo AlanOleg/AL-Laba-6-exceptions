@@ -16,9 +16,6 @@ public:
         }
         cout << endl;
     }
-    /*const char* what() const noexcept override {
-        return "The array is not a Fibonacci sequence!";
-    }*/
 };
 
 class Fibonacci_sequence {
