@@ -1,20 +1,40 @@
 ﻿#include <iostream>
 using namespace std;
 
+class Fibonacci_sequence_exception : public invalid_argument {
+    int* sequence;
+    int length;
+public:
+    Fibonacci_sequence_exception(int array[]) : invalid_argument("The array is not a Fibonacci sequence!") {
+        length = (sizeof(array) - 1);
+        sequence = array;
+    };
+    void print() {
+        cout << "Length = " << length << endl << "Sequence: ";
+        for (int i = 0; i < length; i++) {
+            cout << sequence[i] << " ";
+        }
+        cout << endl;
+    }
+    /*const char* what() const noexcept override {
+        return "The array is not a Fibonacci sequence!";
+    }*/
+};
+
 class Fibonacci_sequence {
     int *sequence;
     int length;
 public:
     Fibonacci_sequence(int array[]) {
-        length = sizeof(array);
+        length = (sizeof(array) - 1);
         sequence = array;
-        if (!this->test()) {
+        if (!test()) {
             throw Fibonacci_sequence_exception(array);
         }
     }
     bool test() {
         if (sequence[0] == 0 and sequence[1] == 1) {
-            for (int i = 2; i < sizeof(sequence); i++) {
+            for (int i = 2; i < length; i++) {
                 if (not(sequence[i] == sequence[i - 1] + sequence[i - 2])) {
                     return false;
                 }
@@ -25,31 +45,11 @@ public:
     }
     void print() {
         cout << "Length = " << length << endl << "Sequence: ";
-        for (int i = 0; i < sizeof(sequence); i++) {
+        for (int i = 0; i < length; i++) {
             cout << sequence[i] << " ";
         }
         cout << endl;
     }
-};
-
-class Fibonacci_sequence_exception: public invalid_argument{
-    int* sequence;
-    int length;
-public:
-    Fibonacci_sequence_exception(int array[]): invalid_argument("The array is not a Fibonacci sequence!") {
-        length = sizeof(array);
-        sequence = array;
-    };
-    void print() {
-        cout << "Length = " << length << endl << "Sequence: ";
-        for (int i = 0; i < sizeof(sequence); i++) {
-            cout << sequence[i] << " ";
-        }
-        cout << endl;
-    }
-    /*const char* what() const noexcept override {
-        return "The array is not a Fibonacci sequence!";
-    }*/
 };
 
 int main() {
