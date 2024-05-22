@@ -6,7 +6,7 @@ class Fibonacci_sequence_exception : public invalid_argument {
     int length;
 public:
     Fibonacci_sequence_exception(int array[]) : invalid_argument("The array is not a Fibonacci sequence!") {
-        length = (sizeof(array) - 1);
+        length = sizeof(array) - 1;
         sequence = array;
     };
     void print() {
@@ -26,7 +26,7 @@ class Fibonacci_sequence {
     int length;
 public:
     Fibonacci_sequence(int array[]) {
-        length = (sizeof(array) - 1);
+        length = sizeof(array) - 1;
         sequence = array;
         if (!test()) {
             throw Fibonacci_sequence_exception(array);
